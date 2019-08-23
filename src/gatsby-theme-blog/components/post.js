@@ -32,7 +32,6 @@ const Post = ({
       </Styled.p>
       <MDXRenderer>{post.body}</MDXRenderer>
     </main>
-    <h1>Hello there</h1>
     <PostFooter {...{ previous, next }} />
   </Layout>
 )

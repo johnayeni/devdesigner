@@ -1,0 +1,36 @@
+form {
+  font-family: sans-serif;
+  border: none;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-weight: 700;
+}
+
+form * {
+  margin: 10px 0;
+}
+form h3 {
+  color: #000 !important;
+}
+
+form input {
+  padding: 20px;
+  width: 300px;
+  border: none;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #f4f4f4;
+}
+
+form a {
+  color: #dd3a69;
+}
+
+form a:hover {
+  text-decoration: none;
+}

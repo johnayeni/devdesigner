@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import { css, Styled, Flex } from "theme-ui"
 
 import Bio from "../components/bio"
+import NewsLetter from "../components/news-letter"
 
 const Footer = ({ previous, next }) => (
   <footer
@@ -12,6 +13,8 @@ const Footer = ({ previous, next }) => (
     })}
   >
     <Styled.hr />
+    <NewsLetter />
+    <br />
     <Bio />
     {(previous || next) && (
       <Flex

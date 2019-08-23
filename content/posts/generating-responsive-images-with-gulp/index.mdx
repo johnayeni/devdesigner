@@ -1,0 +1,66 @@
+---
+title: Generating responsive images with Gulp
+date: 2019-01-13
+---
+
+![Faetured image](header.png)
+
+To be able to do this, make sure you first install ImageMagick on your machine. It’s available on Windows, Mac and Linux.
+Then for the gulp task, you will need to add gulp-imagemin, imagemin-mozjpeg, gulp-image-resize and gulp-rename as dev dependencies.
+
+`npm i gulp gulp-imagemin imagemin-mozjpeg gulp-image-resize gulp-rename -s -D`
+
+Or with yarn
+
+`yarn add gulp gulp-imagemin imagemin-mozjpeg gulp-image-resize gulp-rename -D`
+
+You can then add a Gulp task for the image generation
+
+```js
+const gulp = require("gulp")
+const imagemin = require("gulp-imagemin")
+const imageminMozjpeg = require("imagemin-mozjpeg")
+const imageResize = require("gulp-image-resize")
+const rename = require("gulp-rename")
+
+gulp.task("images", () => {
+  //   specify different image sizes
+  const sizes = [
+    { width: 320, quality: 40, suffix: "small" },
+    { width: 480, quality: 60, suffix: "medium" },
+    { width: 800, quality: 80, suffix: "large" },
+  ]
+  let stream
+  sizes.forEach(size => {
+    stream = gulp
+      //     source for images to optimize
+      .src("<path to images>")
+      //     resize image
+      .pipe(imageResize({ width: size.width }))
+      //       add suffix to image
+      .pipe(
+        rename(path => {
+          path.basename += `-${size.suffix}`
+        })
+      )
+      //     reduce image quality based on the size
+      .pipe(
+        imagemin(
+          [
+            imageminMozjpeg({
+              quality: size.quality,
+            }),
+          ],
+          {
+            verbose: true,
+          }
+        )
+      )
+      //     output optimized images to a destination folder
+      .pipe(gulp.dest("<path to output responsive images"))
+  })
+  return stream
+})
+```
+
+The task can then be run by using `gulp images` on the terminal.
