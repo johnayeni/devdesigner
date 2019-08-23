@@ -50,7 +50,7 @@ module.exports = {
         url: `https://johnayeni.github.io/portfolio/`,
       },
       {
-        name: `twitter`,
+        name: `Twitter`,
         url: `https://twitter.com/johnayeni_`,
       },
       {

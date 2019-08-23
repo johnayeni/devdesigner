@@ -13,6 +13,8 @@ const Footer = ({ previous, next }) => (
     })}
   >
     <Styled.hr />
+    Liked this article, Join the news-letter to get updated on more awesome
+    content
     <NewsLetter />
     <br />
     <Bio />
