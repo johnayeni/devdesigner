@@ -5,7 +5,9 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
-    "build": "gatsby build"
+    "build": "gatsby build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d public"
   },
   "dependencies": {
     "gatsby": "^2.13.73",
@@ -19,6 +21,7 @@
     "gatsby-theme-blog": "^1.0.2",
     "gatsby-transformer-remark": "^2.6.18",
     "gatsby-transformer-sharp": "^2.2.10",
+    "gh-pages": "^2.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   }
