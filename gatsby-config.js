@@ -25,7 +25,7 @@ module.exports = {
         name: `Devdesigner`,
         short_name: `devdesigner`,
         start_url: `/`,
-        background_color: `#FF337D`,
+        background_color: `#000000`,
         theme_color: `#FF337D`,
         display: `standalone`,
         icon: `src/gatsby-theme-blog/assets/logo.png`,

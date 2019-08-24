@@ -14,6 +14,7 @@ const NewsLetter = () => (
       type="text"
       name="email"
       id="tlemail"
+      aria-label="email"
       placeholder="e.g rick.sanchez@gmail.com"
     />
     <input type="hidden" value="1" name="embed" />
