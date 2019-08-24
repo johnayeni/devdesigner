@@ -7,7 +7,13 @@ const NewsLetter = () => (
     method="post"
     className="form"
     target="popupwindow"
-    onsubmit="window.open('https://tinyletter.com/johnayeni', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"
+    onSubmit={() =>
+      window.open(
+        "https://tinyletter.com/johnayeni",
+        "popupwindow",
+        "scrollbars=yes,width=800,height=600"
+      )
+    }
   >
     <h3>Join the newsletter</h3>
     <input
