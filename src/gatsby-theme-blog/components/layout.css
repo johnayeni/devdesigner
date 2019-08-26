@@ -3,10 +3,12 @@
   src: url("../assets/Gordita.otf");
 }
 
+@font-face {
+  font-family: "Sosick";
+  src: url("../assets/soooooooosick.ttf");
+}
+
 body,
-h1,
-h2,
-h3,
 h4,
 h5,
 h6,
@@ -15,13 +17,31 @@ input,
 button {
   font-family: "Gordita", sans-serif !important;
 }
+
+body {
+  margin: 0;
+}
+
+@media (min-width: 800px) {
+  body {
+    border: 15px solid #1b1b1b;
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Sosick", sans-serif !important;
+  text-transform: uppercase;
+}
+
 .gatsby-resp-image-background-image {
   display: none !important;
 }
 
 button {
   color: #fff;
-  background-color: #dd3a69;
+  background-color: #429e9d;
   border: none;
   padding: 12px 20px;
   font-size: 1rem;

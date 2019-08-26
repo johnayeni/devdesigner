@@ -15,7 +15,7 @@ form * {
   margin: 10px 0;
 }
 form h3 {
-  color: #000 !important;
+  color: #1b1b1b !important;
 }
 
 form input {
@@ -29,7 +29,7 @@ form input {
 }
 
 form a {
-  color: #dd3a69;
+  color: #429e9d;
 }
 
 form a:hover {
