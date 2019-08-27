@@ -3,11 +3,6 @@
   src: url("../assets/Gordita.otf");
 }
 
-@font-face {
-  font-family: "Sosick";
-  src: url("../assets/soooooooosick.ttf");
-}
-
 body,
 h4,
 h5,
@@ -26,13 +21,6 @@ body {
   body {
     border: 15px solid #1b1b1b;
   }
-}
-
-h1,
-h2,
-h3 {
-  font-family: "Sosick", sans-serif !important;
-  text-transform: uppercase;
 }
 
 .gatsby-resp-image-background-image {

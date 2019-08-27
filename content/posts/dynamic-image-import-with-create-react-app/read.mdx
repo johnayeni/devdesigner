@@ -1,0 +1,168 @@
+---
+title: Dynamic Image Imports with Create React App
+
+date: 2019-08-27
+---
+
+Recently I was trying to dynamically import images for a component that renders a list of items, with each item tied to its own image in my images folder.
+To solve this, a solution would have been to do this.
+
+<br />
+
+```js
+import React from 'react'
+import birdImage from './images/bird.png'
+import catImage from './images/cat.png'
+import lionImage from './images/lion.png'
+
+const animals = [
+  {
+    name: 'bird',
+    image: birdImage,
+  },
+  {
+    name: 'cat',
+    image: catImage,
+  },
+  {
+    name: 'lion',
+    image: lionImage,
+  }
+]
+
+export default () => (
+  <ul>
+    {
+      animals.map(animal => (
+        <li>
+          <p>{animal.name}</p>
+          <img src={animal.image} alt={animal.name}/>
+        </li>
+      ))
+    }
+  <ul>
+)
+```
+
+<br />
+
+Importing all the images at first and then adding them to thier respective list item works, but this is highly inefficient and stressful. Imaging importing images for up to a 100 items. I wanted something more like the code example below instead.
+
+<br />
+
+```js
+import React from 'react'
+
+const animals = ['bird', 'lion', 'cat']
+
+export default () => (
+  <ul>
+    {
+      animals.map(animal => (
+        <li>
+          <p>{animal}</p>
+          <img src={require(`./images/${animal}.png`)} alt={animal}/>
+        </li>
+      ))
+    }
+  <ul>
+)
+```
+
+<br />
+
+### Or this
+
+```js
+import React from 'react'
+import birdImage from './images/bird.png'
+import catImage from './images/cat.png'
+import lionImage from './images/lion.png'
+
+const animals = [
+  {
+    name: 'bird',
+    image: `./images/bird.png`,
+  },
+  {
+    name: 'cat',
+    image: `./images/cat.png`,
+  },
+  {
+    name: 'lion',
+    image: `./images/lion.png`,
+  }
+]
+
+export default () => (
+  <ul>
+    {
+      animals.map(animal => (
+        <li>
+          <p>{animal.name}</p>
+          <img src={animal.image} alt={animal.name}/>
+        </li>
+      ))
+    }
+  <ul>
+)
+```
+
+<br />
+
+But this dosen't work as Webpack (which is used in create react app to bundle javascript files) does all imports at compile time.
+To solve this, you need to use `require.context`.
+The `require.context` function creates a context module which references files which are in a directory. It takes in 3 parameters.
+
+- the directory to match within,
+- a boolean flag to include or exclude subdirectories,
+- a regular expression to match files against.
+
+The context module exports a `require` function that takes one argument: the request.
+
+The exported function has another property `keys` which is a function that returns all possible requests that the context module can handle.
+
+Examples:
+
+<br />
+
+```js
+/**
+ * The ./svgs folder contains 2 files and a folder which has a file in it
+ * "planet.svg", "world.svg" and "faces/girl.svg"
+ */
+const req = require.context("./svgs", true, /^\.\/.*\.svg$/)
+
+const tableTemplate = req("./planet.svg")
+// tableTemplate === require("./svgs/planet.svg");
+
+req.keys()
+// is ["./planet.svg", "./world.svg", "./faces/girl.svg"]
+```
+
+Using the context module to solve our earlier problem, we now have this
+
+```js
+import React from 'react'
+
+const requestImageFile = require.context('./images', true, /.png$/);
+
+const animals = ['bird', 'lion', 'cat']
+
+export default () => (
+  <ul>
+    {
+      animals.map(animal => (
+        <li>
+          <p>{animal}</p>
+          <img src={requestImageFile(`./${animal}.png`)} alt={animal}/>
+        </li>
+      ))
+    }
+  <ul>
+)
+```
+
+<br />
+
+Read more about the Context module in the Webpack docs [here](https://webpack.js.org/guides/dependency-management/#requirecontext)
