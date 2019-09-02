@@ -1,9 +1,9 @@
 import React from "react"
 import { Disqus, CommentCount } from "gatsby-plugin-disqus"
 
-const Comments = ({ post, siteUrl }) => {
+const Comments = ({ post }) => {
   let disqusConfig = {
-    url: `${siteUrl + window.location.pathname}`,
+    url: `${typeof window !== "undefined" ? window.location.href : ""}`,
     identifier: post.id,
     title: post.title,
   }

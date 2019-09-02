@@ -11,7 +11,7 @@ const Post = ({
   data: {
     post,
     site: {
-      siteMetadata: { title, siteUrl },
+      siteMetadata: { title },
     },
   },
   location,
@@ -34,7 +34,7 @@ const Post = ({
       <MDXRenderer>{post.body}</MDXRenderer>
     </main>
     <PostFooter {...{ previous, next }} />
-    <Comments post={post} siteUrl={siteUrl} />
+    <Comments post={post} />
   </Layout>
 )
 
