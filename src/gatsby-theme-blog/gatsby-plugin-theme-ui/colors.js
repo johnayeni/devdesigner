@@ -7,7 +7,7 @@ const mint = `#429e9d`
 export default merge(defaultThemeColors, {
   text: blackish,
   primary: mint,
-  heading: blackish,
+  heading: mint,
   modes: {
     dark: {
       background: blackish,

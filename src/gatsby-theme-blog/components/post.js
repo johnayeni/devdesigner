@@ -2,6 +2,7 @@ import React from "react"
 import { Styled, css } from "theme-ui"
 
 import PostFooter from "../components/post-footer"
+import Comments from "../components/comments"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { MDXRenderer } from "gatsby-plugin-mdx"
@@ -10,7 +11,7 @@ const Post = ({
   data: {
     post,
     site: {
-      siteMetadata: { title },
+      siteMetadata: { title, siteUrl },
     },
   },
   location,
@@ -33,6 +34,7 @@ const Post = ({
       <MDXRenderer>{post.body}</MDXRenderer>
     </main>
     <PostFooter {...{ previous, next }} />
+    <Comments post={post} siteUrl={siteUrl} />
   </Layout>
 )
 

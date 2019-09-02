@@ -6,6 +6,12 @@ module.exports = {
       options: {},
     },
     {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `dev-designer`,
+      },
+    },
+    {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
@@ -43,6 +49,7 @@ module.exports = {
   siteMetadata: {
     title: `Dev Designer Blog`,
     author: `John Ayeni`,
+    siteUrl: `https://devdesigner.xyz`,
     description: `I post articles on Front-end tech and other experiences I have in the tech space.`,
     social: [
       {
