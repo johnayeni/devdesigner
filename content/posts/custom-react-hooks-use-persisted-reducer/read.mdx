@@ -1,0 +1,127 @@
+---
+title: Custom React Hooks - Use Persisted Reducer
+date: 2019-09-03
+---
+
+![Use Persisted Reducer](UsePersistedReducer.png)
+
+[Hooks](https://reactjs.org/docs/hooks-intro.html) are a new addition in React 16.8. They let you use state and other React features without writing a class.
+
+<br/>
+
+```js
+import React, { useState } from 'react';
+
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+<br/>
+<hr />
+
+## useReducer
+
+```js
+const [state, dispatch] = useReducer(reducer, initialArg, init);
+```
+<br/>
+
+`useReducer` is an alternative to `useState`. Accepts a reducer of type `(state, action) => newState`, and returns the current state paired with a dispatch method. (If you’re familiar with Redux, you already know how this works.)
+
+`useReducer` is usually preferable to `useState` when you have complex state logic that involves multiple sub-values or when the next state depends on the previous one. useReducer also lets you optimize performance for components that trigger deep updates because you can pass dispatch down instead of callbacks.
+
+Check out `useReducer` in the React docs [here](https://reactjs.org/docs/hooks-reference.html#usereducer)
+
+## usePersistedReducer
+
+[`redux-persist`](https://www.npmjs.com/package/redux-persist) is a package which is used to persist state from redux
+to local storage so as to prevent the state from going back to its initial state whenever the page reloads.
+`usePersistedReducer` is a custom react hook is a custom react hook that can be used in place of `useReducer` to persist the state to local storage or any other
+browser storage provider.
+
+`use-persisted-reducer` but is a factory that accepts a storage `key`
+and an optional storage provider (default = `localStorage`) and returns a hook
+that you can use as a direct replacement for `useReducer`.
+
+
+### Requirement
+
+To use `use-persisted-reducer`, you must use `react@16.8.0` or greater which includes Hooks.
+
+### Installation
+
+```sh
+$ npm i use-persisted-reducer --save
+```
+
+or
+
+```sh
+$ yarn add use-persisted-reducer
+```
+
+### Example
+
+<br/>
+
+```js
+import React from 'react';
+import createPersistedReducer from 'use-persisted-reducer';
+
+const usePersistedReducer = createPersistedReducer('state');
+
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      throw new Error();
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = usePersistedReducer(reducer, initialState);
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+    </>
+  );
+}
+
+export default Counter;
+```
+
+<br/>
+
+You can also pass in your own storage provider
+
+### Example
+
+<br/>
+
+```js
+import React from 'react';
+import createPersistedReducer from 'use-persisted-reducer';
+
+// defaults to globalThis.localStorage
+const usePersistedReducer = createPersistedReducer('state', globalThis.sessionStorage);
+```
+<br/>
+
+You can contribute to the package or give it a star ⭐️ [here](https://github.com/johnayeni/use-persisted-reducer) on Github.

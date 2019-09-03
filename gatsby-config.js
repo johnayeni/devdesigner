@@ -1,6 +1,7 @@
 module.exports = {
   plugins: [
     `gatsby-plugin-offline`,
+    `gatsby-plugin-twitter`,
     {
       resolve: `gatsby-theme-blog`,
       options: {},
