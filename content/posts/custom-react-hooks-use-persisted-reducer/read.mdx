@@ -7,7 +7,6 @@ date: 2019-09-03
 
 [Hooks](https://reactjs.org/docs/hooks-intro.html) are a new addition in React 16.8. They let you use state and other React features without writing a class.
 
-<br/>
 
 ```js
 import React, { useState } from 'react';
@@ -26,7 +25,6 @@ function Example() {
   );
 }
 ```
-<br/>
 <hr />
 
 ## useReducer
@@ -34,7 +32,6 @@ function Example() {
 ```js
 const [state, dispatch] = useReducer(reducer, initialArg, init);
 ```
-<br/>
 
 `useReducer` is an alternative to `useState`. Accepts a reducer of type `(state, action) => newState`, and returns the current state paired with a dispatch method. (If you’re familiar with Redux, you already know how this works.)
 
@@ -72,7 +69,6 @@ $ yarn add use-persisted-reducer
 
 ### Example
 
-<br/>
 
 ```js
 import React from 'react';
@@ -107,13 +103,11 @@ function Counter() {
 export default Counter;
 ```
 
-<br/>
 
 You can also pass in your own storage provider
 
 ### Example
 
-<br/>
 
 ```js
 import React from 'react';
@@ -122,6 +116,5 @@ import createPersistedReducer from 'use-persisted-reducer';
 // defaults to globalThis.localStorage
 const usePersistedReducer = createPersistedReducer('state', globalThis.sessionStorage);
 ```
-<br/>
 
 You can contribute to the package or give it a star ⭐️ [here](https://github.com/johnayeni/use-persisted-reducer) on Github.

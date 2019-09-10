@@ -7,7 +7,6 @@ date: 2019-08-27
 Recently I was trying to dynamically import images for a component that renders a list of items, with each item tied to its own image in my images folder.
 To solve this, a solution would have been to do this.
 
-<br />
 
 ```js
 import React from 'react'
@@ -44,11 +43,9 @@ export default () => (
 )
 ```
 
-<br />
 
 Importing all the images at first and then adding them to thier respective list item works, but this is highly inefficient and stressful. Imaging importing images for up to a 100 items. I wanted something more like the code example below instead.
 
-<br />
 
 ```js
 import React from 'react'
@@ -69,7 +66,6 @@ export default () => (
 )
 ```
 
-<br />
 
 ### Or this
 
@@ -108,7 +104,6 @@ export default () => (
 )
 ```
 
-<br />
 
 But this dosen't work as Webpack (which is used in create react app to bundle javascript files) does all imports at compile time.
 To solve this, you need to use `require.context`.
@@ -124,7 +119,6 @@ The exported function has another property `keys` which is a function that retur
 
 Examples:
 
-<br />
 
 ```js
 /**
@@ -163,6 +157,5 @@ export default () => (
 )
 ```
 
-<br />
 
 Read more about the Context module in the Webpack docs [here](https://webpack.js.org/guides/dependency-management/#requirecontext)

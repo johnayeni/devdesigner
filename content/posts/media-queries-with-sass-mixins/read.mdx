@@ -1,0 +1,160 @@
+---
+title: Media Queries with SASS mixins
+date: 2019-09-10
+---
+
+Mixins allow you to define styles that can be re-used throughout your stylesheet.They make it easy to
+avoid using non-semantic classes like .float-left, and to distribute collections of styles in libraries.
+Mixins are defined using the `@mixin` at-rule, which is written `@mixin <name> { ... }` or `@mixin name(<arguments...>) { ... }`.
+They can be used to encapsulate styles that can be dropped into a single style rule; they can contain style rules of their own
+that can be nested in other rules or included at the top level of the stylesheet; or they can just serve to modify variables.
+
+Mixins are included into the current context using the `@include` at-rule, which is written `@include <name>` or `@include <name>(<arguments...>)`,
+with the name of the mixin being included.
+
+### Example with no arguments
+
+```scss
+
+// Style in Scss
+
+@mixin styled-text {
+  text-align: center;
+  font-weight: 500;
+}
+
+.article {
+  @include center-text;
+  .header {
+    @include center-text;
+  }
+}
+
+```
+
+```css
+// Resulting css
+
+.article {
+  text-align: center;
+  font-weight: 500;
+}
+
+.article .header {
+  text-align: center;
+  font-weight: 500;
+}
+
+```
+
+### Example with arguments
+
+```scss
+// Style in Scss
+
+@mixin size($width: 50px, $height: 50px) {
+  width: $width;
+  height: $height;
+}
+
+.box {
+  @include size(100px, 100px);
+}
+
+.bigger-box {
+  @include size(400px, 300px);
+}
+```
+
+```css
+// Resulting css
+
+.box {
+  width: 100px;
+  height: 100px;
+}
+
+.bigger-box {
+  width: 400px;
+  height: 300px;
+}
+```
+
+Mixins can be really cool. They can be taken advantage to make writing of Media queries across your app easier.
+Media queries can be alot, especially when trying to write queries for different devices and screen sizes.
+I will show you how to make this a bit easier with mixins. Take this example below.
+
+```scss
+.box {
+  width: 400px;
+}
+
+.special-box {
+  color: red;
+}
+
+@media (max-width: 720px) {
+  .box {
+    width: 100px;
+  }
+  .special-box {
+    color: blue;
+  }
+}
+
+@media (min-width: 1440px) {
+  .box {
+    width: 500px;
+  }
+}
+
+```
+
+This might not look so bad, but can become a pain as your styles become larger. It becomes less easy to relate selectors with thier corresponding
+styles on in a media query, or the queries can be written under or with each style to improve readability. A mixin can be used to make this easier.
+
+```scss
+@mixin mobile {
+  @media (max-width: 720px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1440px) {
+    @content;
+  }
+}
+
+.box {
+  width: 400px;
+  @include mobile {
+    width: 100px;
+  }
+  @include desktop {
+    width: 500px;
+  }
+}
+
+.bigger-box {
+  color: red;
+  @include desktop {
+    color: blue;
+  }
+}
+
+```
+
+This helps to improve readability and also writing as the media query is now some sort of short hand.
+
+### Note
+
+This might not be ideal if you want to seperate your media queries to different files to maybe to load them on different screen sizes.
+
+#### Example
+
+```html
+<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="800.css" />
+```
+
+But it is possible to find a work around which will still involve using mixins.

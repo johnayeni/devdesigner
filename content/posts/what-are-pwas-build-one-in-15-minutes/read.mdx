@@ -6,7 +6,6 @@ date: 2018-05-30
 
 [Code Repo](https://github.com/johnayeni/news-sources-pwa/)
 
-<br />
 
 ![Faetured image](pwa.png)
 
@@ -35,7 +34,6 @@ PWAs wouldn’t currently be possible without the help of the Service Worker. A 
 
 A service worker can be registered in your app like this
 
-<br />
 
 ```js
 if (navigator.serviceWorker) {
@@ -50,7 +48,6 @@ if (navigator.serviceWorker) {
 }
 ```
 
-<br />
 
 Read more on service wokers [here](https://developers.google.com/web/fundamentals/primers/service-workers/)
 
@@ -76,7 +73,6 @@ There is a starter code which can be dowloaded or cloned [here](https://github.c
 
 Our app has a file structure like this
 
-<br />
 
 ```
 news-sources-pwa
@@ -91,7 +87,6 @@ news-sources-pwa
   sw.js
 ```
 
-<br />
 
 ### The App shell
 
@@ -99,7 +94,6 @@ An application shell (or app shell) architecture is one way to build a Progressi
 
 To make this we are going to make a simple structure in our `index.html` file for our app structure
 
-<br />
 
 ```html
 <!DOCTYPE html>
@@ -125,13 +119,11 @@ To make this we are going to make a simple structure in our `index.html` file fo
 </html>
 ```
 
-<br />
 
 ## Registering a Service Worker
 
 Edit the `app.js` file register a service worker file
 
-<br />
 
 ```js
 if ("serviceWorker" in navigator) {
@@ -144,11 +136,9 @@ if ("serviceWorker" in navigator) {
 }
 ```
 
-<br />
 
 Make sure you have the `package.json` from the starter file which should contain This
 
-<br />
 
 ```json
 {
@@ -175,7 +165,6 @@ Make sure you have the `package.json` from the starter file which should contain
 }
 ```
 
-<br />
 To run the app simple run `npm install` then `npm start` on your terminal or command line
 
 The app should be running on `http://localhost:5000`
@@ -193,7 +182,6 @@ Register an account on [News Api](https://newsapi.org/) and get an API key.
 
 The we will use Jaascript to fetch out data. Edit the `app.js` file to have this.
 
-<br />
 
 ```js
 const apiKey = "YOUR_NEWS_API_KEY"
@@ -264,7 +252,6 @@ window.addEventListener("load", async e => {
 window.addEventListener("online", () => updateNews(sourceOptions.value))
 ```
 
-<br />
 
 In our `app.js` file now, we fetch a list of news sources form the API and set them on the select input with `updateNewsSources`. The we fetch a list of articles from a default source initially with `updateNews`.
 We added an event listener to the select input so that when the user selects a new source, we fetch the articles for that source.
@@ -275,7 +262,6 @@ Next we need to make our app work offline. The service worker will handle this.
 
 First we need to cache static resources when our service worker is activated, edit `sw.js`
 
-<br />
 
 ```js
 const cacheName = "news-sources-v1"
@@ -298,7 +284,6 @@ self.addEventListener("activate", event => {
 })
 ```
 
-<br />
 
 As you can see above, we listed the files which we need for our app shell and cached them once the service worker installs
 The cache name is also in form of a version number, this is usefull for pushing updates when the resources needed for the app shell have been changed
@@ -311,7 +296,6 @@ The approach for origins not from our app is called a `NetworkFirst` Approach.
 
 To implement our `CacheFirst` and `NetworkFirst` approaches, the `sw.js` file should now be this.
 
-<br />
 
 ```js
 const cacheName = "news-sources-v1"
@@ -359,7 +343,6 @@ const networkFirst = async request => {
 }
 ```
 
-<br />
 
 Reload the app check the applications tab on the dev-tools. The apps static resources should be cached
 
@@ -373,7 +356,6 @@ The web app manifest provides information about a web application in a JSON text
 
 The starter code given, already has icons needed for the app. Next we just need to fill in details for our manifest file, which is `manifest.json`
 
-<br />
 
 ```json
 {
@@ -430,7 +412,6 @@ The starter code given, already has icons needed for the app. Next we just need 
 }
 ```
 
-<br />
 
 Read more on the web app manifest [here](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 
