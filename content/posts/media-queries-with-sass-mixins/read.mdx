@@ -15,7 +15,6 @@ with the name of the mixin being included.
 ### Example with no arguments
 
 ```scss
-
 // Style in Scss
 
 @mixin styled-text {
@@ -24,12 +23,11 @@ with the name of the mixin being included.
 }
 
 .article {
-  @include center-text;
+  @include styled-text;
   .header {
-    @include center-text;
+    @include styled-text;
   }
 }
-
 ```
 
 ```css
@@ -44,7 +42,6 @@ with the name of the mixin being included.
   text-align: center;
   font-weight: 500;
 }
-
 ```
 
 ### Example with arguments
@@ -107,7 +104,6 @@ I will show you how to make this a bit easier with mixins. Take this example bel
     width: 500px;
   }
 }
-
 ```
 
 This might not look so bad, but can become a pain as your styles become larger. It becomes less easy to relate selectors with thier corresponding
@@ -142,7 +138,6 @@ styles on in a media query, or the queries can be written under or with each sty
     color: blue;
   }
 }
-
 ```
 
 This helps to improve readability and also writing as the media query is now some sort of short hand.
@@ -154,7 +149,11 @@ This might not be ideal if you want to seperate your media queries to different 
 #### Example
 
 ```html
-<link rel="stylesheet" media="screen and (min-device-width: 800px)" href="800.css" />
+<link
+  rel="stylesheet"
+  media="screen and (min-device-width: 800px)"
+  href="800.css"
+/>
 ```
 
 But it is possible to find a work around which will still involve using mixins.
