@@ -14,4 +14,4 @@ jobs:
     - name: Create build
       run: npm run build
     - name: Deploy build files to gh-pages
-      run: npm run gh-pages
+      run: npm run deploy
