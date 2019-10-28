@@ -8,17 +8,16 @@ The default way of importing files or modules which are not from `node_modules` 
 
 Take for example we have a directory structure like this.
 
-```bash
-myproject
-  - public
-  - src
-    - components
-      PictureComponent
-    - pages
-      MainPage
-    index.js
-  package.json
-  package-lock.json
+```
+|-- public
+|-- src
+|  |-- components
+|  |  |--PictureComponent
+|  |-- pages
+|  |   |-- MainPage
+|  |--index.js
+|-- package.json
+|-- package-lock.json
 ```
 
 We need to import the `PictureComponent` in our `MainPage`.
@@ -28,7 +27,7 @@ We need to import the `PictureComponent` in our `MainPage`.
 import PictureComponent from "../components/PictureComponent";
 ```
 
-This is totally fine, until your project becomes very large and some files are several levels deep. It becomes more stressfull to import
+This is totally fine, until your project becomes very large and some files are several levels deep. It becomes harder to import and trace
 files and modules from other directories in the project.
 
 ```jsx
@@ -47,7 +46,7 @@ import PictureComponent from "components/PictureComponent";
 ```
 
 This import will work from any `js` or `jsx` file, no matter where they are in the project directory. To set this up create a file called `jsconfig.json` in
-the project root folder. And add the configuration. If you are using typescript, you should create a `tsconfig.json` instead and add the same configuration.
+the project root folder. And add the configuration below. If you are using typescript, you should add the configuration to your `tsconfig.json`.
 
 ```json
 {
