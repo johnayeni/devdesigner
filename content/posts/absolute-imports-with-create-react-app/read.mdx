@@ -1,0 +1,61 @@
+---
+title: Absolute imports with Create React App
+
+date: 2019-10-28
+---
+
+The default way of importing files or modules which are not from `node_modules` is the usage of <b>Relative Imports</b>.
+
+Take for example we have a directory structure like this.
+
+```bash
+myproject
+  - public
+  - src
+    - components
+      PictureComponent
+    - pages
+      MainPage
+    index.js
+  package.json
+  package-lock.json
+```
+
+We need to import the `PictureComponent` in our `MainPage`.
+
+```js
+//example of a relative import
+import PictureComponent from "../components/PictureComponent";
+```
+
+This is totally fine, until your project becomes very large and some files are several levels deep. It becomes more stressfull to import
+files and modules from other directories in the project.
+
+```jsx
+// imagine having to import a file like this
+import CustomHeader from "../../../../../compoents/CustomHeader";
+```
+
+### Using Absolute Imports
+
+Absolute imports helps with importing files from a common source. In most cases, most files you would need would be in your source (`src`) directory.
+With Absolute Imports, you can write your file paths, already assuming you are at the `src` directory.
+
+```js
+// example of an absolute import
+import PictureComponent from "components/PictureComponent";
+```
+
+This import will work from any `js` or `jsx` file, no matter where they are in the project directory. To set this up create a file called `jsconfig.json` in
+the project root folder. And add the configuration. If you are using typescript, you should create a `tsconfig.json` instead and add the same configuration.
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "src"
+  }
+}
+```
+
+This will help VSCode and other IDE to resolve path in TypeScript & JavaScript and ofcourse, if there are cases where you need to still use a relative import if it's more
+sensible, it will still work.
